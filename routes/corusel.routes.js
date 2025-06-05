@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 const { check } = require("express-validator");
-const Authorization = require("../middlewares/auth");
+const {AdminAuthorization} = require("../middlewares/auth");
 const { AddCorusel, listCorusel, listActiveCorusel, updateCorusel, updateCoruselStatus, listCoruselById } = require("../controller.js/corusel");
 
 router.post(
     "/create",
-    Authorization,
+    AdminAuthorization,
     [
         check("name", "Name is required").not().isEmpty(),
         check("imageUrl", "Image is required").not().isEmpty(),
@@ -17,13 +17,13 @@ router.post(
 
 router.get(
     "/list",
-    Authorization,
+    AdminAuthorization,
     listCorusel
 );
 
 router.get(
     "/list/:corusel_id",
-    Authorization,
+    AdminAuthorization,
     listCoruselById
 );
 
@@ -34,7 +34,7 @@ router.get(
 
 router.put(
     "/update/:corusel_id",
-    Authorization,
+    AdminAuthorization,
     [
         check("name", "Name is required").not().isEmpty(),
         check("image", "Image is required").not().isEmpty(),
@@ -44,7 +44,7 @@ router.put(
 
 router.put(
     "/update-status/:corusel_id",
-    Authorization,
+    AdminAuthorization,
     [
         check("status", "Status is required").not().isEmpty().isIn([ 1, 2, 3]),
     ],

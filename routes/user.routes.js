@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { check } = require("express-validator");
 const { exchangeToken, userProfile } = require("../controller.js/user");
-const Authorization = require("../middlewares/auth");
+const {AdminAuthorization, Auth} = require("../middlewares/auth");
 
 router.post(
     "/exchangeToken",
@@ -14,7 +14,7 @@ router.post(
 );
 
 router.get("/getUser",
-    Authorization,
+    Auth,
     userProfile
 );
 

@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 const { check } = require("express-validator");
-const Authorization = require("../middlewares/auth");
+const {AdminAuthorization} = require("../middlewares/auth");
 const { createCategory, listCategory, listActiveCategory, updateCategory, updateCategoryStatus, createSubCategory, listSubCategorybyCategoryId, updateSubCategory, updateSubCategoryStatus, listActiveCategorywithSubcategory } = require("../controller.js/category");
 
 router.post(
     "/create",
-    Authorization,
+    AdminAuthorization,
     [
         check("name", "Name is required").not().isEmpty(),
     ],
@@ -16,19 +16,19 @@ router.post(
 
 router.get(
     "/list",
-    Authorization,
+    AdminAuthorization,
     listCategory
 );
 
 router.get(
     "/list-active",
-    Authorization,
+    AdminAuthorization,
     listActiveCategory
 );
 
 router.put(
     "/update/:category_id",
-    Authorization,
+    AdminAuthorization,
     [
         check("name", "Name is required").not().isEmpty(),
     ],
@@ -37,7 +37,7 @@ router.put(
 
 router.put(
     "/update-status/:category_id",
-    Authorization,
+    AdminAuthorization,
     [
         check("status", "Status is required").not().isEmpty().isIn(["1", "2", "3"]),
     ],
@@ -46,7 +46,7 @@ router.put(
 
 router.post(
     "/sub-category/create",
-    Authorization,
+    AdminAuthorization,
     [
         check("name", "Name is required").not().isEmpty(),
         check("category", "Category is required").not().isEmpty(),
@@ -56,19 +56,19 @@ router.post(
 
 router.get(
     "/sub-category/list/:category_id",
-    Authorization,
+    AdminAuthorization,
     listSubCategorybyCategoryId
 );
 
 router.get(
     "/sub-category/list-active/:category_id",
-    Authorization,
+    AdminAuthorization,
     listActiveCategory
 );
 
 router.put(
     "/sub-category/update/:category_id",
-    Authorization,
+    AdminAuthorization,
     [
         check("name", "Name is required").not().isEmpty(),
         check("category", "Category is required").not().isEmpty(),
@@ -78,7 +78,7 @@ router.put(
 
 router.put(
     "/sub-category/update-status/:category_id",
-    Authorization,
+    AdminAuthorization,
     [
         check("status", "Status is required").not().isEmpty().isIn(["1", "2", "3"]),
     ],

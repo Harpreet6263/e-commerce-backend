@@ -3,11 +3,11 @@ const router = express.Router();
 
 const { check } = require("express-validator");
 const { createRole } = require("../controller.js/roles");
-const Authorization = require("../middlewares/auth");
+const {AdminAuthorization} = require("../middlewares/auth");
 
 router.post(
   "/create",
-  Authorization,
+  AdminAuthorization,
   [
     check("name", "Name is required").not().isEmpty(),
     check("description", "Description is required").not().isEmpty(),
